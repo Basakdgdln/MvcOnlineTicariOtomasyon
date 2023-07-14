@@ -1,0 +1,54 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar;
+@model List<Departman>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<table class="table table-bordered" style="margin-top:20px">
+    <tr>
+        <th>#</th>
+        <th>DEPARTMAN ADI</th>
+        <td>DETAYLAR</td>
+    </tr>
+
+    <tbody>
+        @foreach (var d in Model)
+        {
+            <tr>
+                <td>#</td>
+                <td>@d.DepartmanAd</td>
+                <td><a href="/Departman/DepartmanDetay/@d.DepartmanID"  class="btn btn-warning" >GÖRÜNTÜLE</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal1">DEPARTMAN EKLE</button>
+<div class="modal" id="modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Yeni Departman Ekleme Ekranı</h3>
+                <button class="btn btn-danger" data-dismiss="modal">x</button>
+            </div>
+            <form action="/Departman/DepartmanEkle" method="post">
+                <div class="modal-body">
+                    <input type="text" class="form-control" name="DepartmanAd" placeholder="Departmanı giriniz..." />
+                    <br />
+                    <button type="submit" class="btn btn-info" id="btn1">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#btn1').click(function () {
+        alert("Yeni departman başarılı bir şekilde eklendi")
+    });
+</script>
+

@@ -1,0 +1,64 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.PagedList<Urun>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<br />
+@using (Html.BeginForm("Index", "Urun", FormMethod.Get))
+{
+    <div class="input-group">
+        <input class="form-control" type="text" placeholder="Aranacak Kelimeyi Girin..." aria-label="Search" aria-describedby="basic-addon2" />
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+}
+
+<table class="table table-bordered" style="margin-top:25px">
+    <thead>
+        <tr>
+            <th>ÜRÜN</th>
+            <th>MARKA</th>
+            <th>STOK</th>
+            <th>ALIŞ FİYATI</th>
+            <th>SATIŞ FİYATI</th>
+            <th>KATEGORİ</th>
+            <th>SİL</th>
+            <th>GÜNCELLE</th>
+            <th>SATIŞ YAP</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.UrunAd</td>
+                <td>@u.Marka</td>
+                <td>@u.Stok</td>
+                <td>@u.AlisFiyat ₺</td>
+                <td>@u.SatisFiyat ₺</td>
+                <td>@u.Kategori.KategoriAd</td>
+                <td><a href="/Urun/UrunSil/@u.UrunID" class="btn btn-danger">SİL</a></td>
+                <td><a href="/Urun/UrunGetir/@u.UrunID" class="btn btn-success">GÜNCELLE</a></td>
+                <td><a href="/Urun/SatisYap/@u.UrunID" class="btn btn-secondary">SATIŞ YAP</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<a href="/Urun/YeniUrun" class="btn btn-primary">YENİ ÜRÜN EKLE</a>
+
+<div class="pagination" style="justify-content:center">
+    @Html.PagedListPager(Model, sayfa => Url.Action("Index", new { sayfa }), new PagedListRenderOptions
+    {
+         LiElementClasses = new List<string>
+         {"page-link"}
+    })
+</div>

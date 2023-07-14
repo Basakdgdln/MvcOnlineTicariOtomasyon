@@ -1,0 +1,32 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.Urun
+@{
+    ViewBag.Title = "YeniUrun";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<br />
+<form class="form-group" method="post">
+    @Html.TextBoxFor(x => x.UrunAd, new { @class = "form-control", @placeholder = "Ürün adını giriniz..." })
+    <br />
+    @Html.TextBoxFor(x => x.Marka, new { @class = "form-control", @placeholder = "Marka adını giriniz..." })
+    <br />
+    <input type="number" class="form-control" name="Stok" placeholder="Stok değerini giriniz..." min="0" />
+    <br />
+    <input type="number" class="form-control" name="AlisFiyat" placeholder="Alış fiyatını giriniz..." min="0" />
+    <br />
+    <input type="number" class="form-control" name="SatisFiyat" placeholder="Satış fiyatını giriniz..." min="0" />
+    <br />
+    @Html.DropDownListFor(x => x.KategoriID, (List<SelectListItem>)ViewBag.urun, new { @class = "form-control" })
+    <br />
+    @Html.TextBoxFor(x => x.UrunGorsel, new { @class = "form-control", @placeholder = "Görsel linkini giriniz..." })
+    <br />
+    <button class="btn btn-primary" id="btn1">ÜRÜNÜ KAYDET</button>
+</form>
+
+<script>
+    $('#btn1').click(function () {
+        alert("İşlem başarılı bir şekilde gerçekleşti.")
+    });
+</script>
+

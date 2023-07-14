@@ -1,0 +1,77 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.PagedList<Cariler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>AD</th>
+        <th>SOYAD</th>
+        <th>ŞEHİR</th>
+        <th>MAIL</th>
+        <th>GÜNCELLE</th>
+        <th>DETAYLAR</th>
+    </tr>
+
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.CariAd</td>
+            <td>@c.CariSoyad</td>
+            <td>@c.CariSehir</td>
+            <td>@c.CariMail</td>
+            <td><a href="/Cari/CariGetir/@c.CariID" class="btn btn-warning">GÜNCELLE</a></td>
+            <td><a href="/Cari/MusteriSatis/@c.CariID" class="btn btn-info">SATIŞ GEÇMİŞİ</a></td>
+        </tr>
+    }
+
+</table>
+
+<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal1">YENİ MÜŞTERİ EKLE</button>
+<div class="modal" id="modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Yeni Cari Ekleme Ekranı</h3>
+                <button class="btn btn-danger" data-dismiss="modal">x</button>
+            </div>
+            <form action="/Cari/YeniCari" method="post">
+                <div class="modal-body">
+                    <input type="text" class="form-control" name="CariAd" placeholder="Müşterinin adını giriniz..." />
+                    <br />
+                    <input type="text" class="form-control" name="CariSoyad" placeholder="Müşterinin soyadını giriniz..." />
+                    <br />
+                    <input type="text" class="form-control" name="CariSehir" placeholder="Müşterinin şehrini giriniz..." />
+                    <br />
+                    <input type="text" class="form-control" name="CariMail" placeholder="Müşterinin mail adresini giriniz..." />
+                    <br />
+                    <button type="submit" class="btn btn-info" id="btn1" style="float:right; width:150px">Kaydet</button>
+                    <br /><br />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="pagination" style="justify-content:center">
+    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }), new PagedListRenderOptions
+    {
+        LiElementClasses = new List<string>
+        {"page-link"}
+        })
+</div>
+
+<script>
+    $('#btn1').click(function () {
+        alert("Müşteri başarılı bir şekilde eklendi...")
+    });
+</script>
+
+

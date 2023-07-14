@@ -1,0 +1,64 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.PagedList<Kategori>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<table class="table table-bordered" style="margin-top:20px">
+    <tr>
+        <th>KATEGORİ ADI</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+    </tr>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.KategoriAd</td>
+                <td><a href="/Kategori/KategoriSil/@item.KategoriID" class="btn btn-danger">SİL</a></td>
+                <td><a href="/Kategori/KategoriGetir/@item.KategoriID" class="btn btn-warning">GÜNCELLE</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal1">YENİ KATEGORİ EKLE</button>
+<div class="modal" id="modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Kategori Ekleme Ekranı</h3>
+                <button class="btn btn-danger" data-dismiss="modal">x</button>
+            </div>
+            <form action="/Kategori/KategoriEkle" method="post">
+                <div class="modal-body">
+                    <input type="text" class="form-control" name="KategoriAd" placeholder="Kategori adını giriniz..." />
+                    <br />
+                    <button type="submit" class="btn btn-info" id="btn1">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="pagination" style="justify-content:center">
+    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }), new PagedListRenderOptions
+    {
+     LiElementClasses = new List<string>
+     {"page-link"}
+    })
+    </div>
+
+
+    <script>
+        $('#btn1').click(function () {
+            alert("Kategori başarılı bir şekilde eklendi")
+        });
+    </script>

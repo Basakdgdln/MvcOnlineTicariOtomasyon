@@ -1,0 +1,33 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.Personel
+@{
+    ViewBag.Title = "PersonelEkle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<br />
+@using (Html.BeginForm("PersonelEkle", "Personel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="">
+        <form class="form-group" method="post">
+            @Html.HiddenFor(x => x.PersonelID)
+            <input type="text" class="form-control" name="PersonelAd" placeholder="Personel adını giriniz..." />
+            <br />
+            <input type="text" class="form-control" name="PersonelSoyad" placeholder="Personel soyadını giriniz..." />
+            <br />
+            <input type="file" name="Personel Görsel" class="form-control" />
+            <br />
+            @Html.DropDownListFor(x => x.DepartmanID, (List<SelectListItem>)ViewBag.dprt, new { @class = "form-control" })
+            <br />
+            <button class="btn btn-primary" style="width:200px">Personeli Ekle</button>
+        </form>
+    </div>
+}
+
+<script>
+    $('#btn1').click(function () {
+        alert("Personel başarılı bir şekilde eklendi")
+    });
+</script>
+

@@ -1,0 +1,52 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.SatisHareket
+@{
+    ViewBag.Title = "SatisGetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<br />
+@using (Html.BeginForm("SatisGuncelle", "Satis", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.SatisID)
+
+    <b>@Html.Label("Ürün Adı:")</b>
+    @Html.DropDownListFor(x => x.UrunID, (List<SelectListItem>)ViewBag.urun, new { @class = "form-control" })
+    <br />
+
+    <b>@Html.Label("Cari:")</b>
+    @Html.DropDownListFor(x => x.CariID, (List<SelectListItem>)ViewBag.cari, new { @class = "form-control" })
+    <br />
+
+    <b>@Html.Label("Personel:")</b>
+    @Html.DropDownListFor(x => x.PersonelID, (List<SelectListItem>)ViewBag.personel, new { @class = "form-control" })
+    <br />
+
+    <b>@Html.Label("Adet:")</b>
+    <input type="number" class="form-control" name="Adet" min="1" value="@ViewBag.adet" id="txt1" onchange="sum();" />
+    <br />
+
+    <b>@Html.Label("Fiyat:")</b>
+    <input type="text" class="form-control" name="Fiyat" min="1" value="@ViewBag.fiyat" id="txt2" onchange="sum();" />
+    <br />
+
+    <b>@Html.Label("Toplam Tutar:")</b>
+    <input type="text" class="form-control" name="ToplamTutar" value="@ViewBag.toplamtutar" id="txt3" readonly />
+    <br />
+
+    <b>@Html.Label("Tarih:")</b>
+    <input type="text" class="form-control" name="Tarih" value="@ViewBag.tarih" />
+    <br />
+
+    <button class="btn btn-warning" style="float: right; width: 250px; height: 45px">Değişiklikleri Kaydet</button>
+}
+
+<script>
+    function sum() {
+        var sayi1 = document.getElementById('txt1').value;
+        var sayi2 = document.getElementById('txt2').value;
+        var sonuc = parseInt(sayi1) * parseInt(sayi2);
+        if (!isNaN(sonuc)) {
+            document.getElementById('txt3').value = sonuc;
+        }
+    }
+</script>

@@ -1,0 +1,39 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.Urun
+@{
+    ViewBag.Title = "UrunGetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<br />
+@using (Html.BeginForm("UrunGuncelle", "Urun", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.UrunID)
+    <label><b>ÜRÜN ADI:</b></label>
+    @Html.TextBoxFor(x => x.UrunAd, new { @class = "form-control" })
+    <br />
+
+    <label><b>MARKA:</b></label>
+    @Html.TextBoxFor(x => x.Marka, new { @class = "form-control", })
+    <br />
+
+    <label><b>STOK ADEDİ:</b></label>
+    @Html.TextBoxFor(x => x.Stok, new { @class = "form-control", })
+    <br />
+    <label><b>ALIŞ FİYAT:</b> </label>
+    @Html.TextBoxFor(x => x.AlisFiyat, new { @class = "form-control", })
+    <br />
+
+    <label><b>SATIŞ FİYAT:</b></label>
+    @Html.TextBoxFor(x => x.SatisFiyat, new { @class = "form-control", })
+    <br />
+
+    <label><b>KATEGORİ:</b></label>
+    @Html.DropDownListFor(x => x.KategoriID, (List<SelectListItem>)ViewBag.urun, new { @class = "form-control" })
+    <br />
+
+    <label><b>GÖRSEL :</b></label>
+    @Html.TextBoxFor(x => x.UrunGorsel, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-warning" style="float: right; width: 250px; height: 45px">Değişiklikleri Kaydet</button>
+}
+

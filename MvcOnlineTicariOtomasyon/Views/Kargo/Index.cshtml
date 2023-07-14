@@ -1,0 +1,44 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar;
+@model List<KargoDetayies>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<br />
+@using (Html.BeginForm("Index", "Kargo", FormMethod.Get))
+{
+    <div class="input-group">
+        <input class="form-control" type="text" placeholder="Kargo Takip Numarası..." name="p" aria-label="Search" aria-describedby="basic-addon2" />
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+}
+
+<table class="table table-bordered" style="margin-top:20px">
+    <tr>
+        <th>TAKİP KODU</th>
+        <th>PERSONEL</th>
+        <th>ALICI</th>
+        <th>TARİH</th>
+        <th>DETAYLAR</th>
+    </tr>
+
+    <tbody>
+        @foreach (var d in Model)
+        {
+            <tr>
+                <td>@d.TakipKodu</td>
+                <td>@d.Personel.PersonelAd @d.Personel.PersonelSoyad</td>
+                <td>@d.Cariler.CariAd @d.Cariler.CariSoyad</td>
+                <td>@d.Tarih.ToShortDateString()</td>
+                <td><a href="/Kargo/KargoTakipDetay/@d.TakipKodu" class="btn btn-info">DETAYLAR</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<a href="/Kargo/YeniKargo" class="btn btn-warning">Yeni Kargo Girişi</a>
+

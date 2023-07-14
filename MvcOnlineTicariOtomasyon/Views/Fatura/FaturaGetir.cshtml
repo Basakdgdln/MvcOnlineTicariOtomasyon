@@ -1,0 +1,43 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.Faturalar
+
+@{
+    ViewBag.Title = "FaturaGetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<br />
+@using (Html.BeginForm("FaturaGuncelle", "Fatura", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.FaturaID)
+
+    <label><b>FATURA SERİ NO:</b></label>
+    @Html.TextBoxFor(x => x.FaturaSeriNo, new { @class = "form-control" })
+    <br />
+
+    <label><b>FATURA SIRA NO:</b></label>
+    @Html.TextBoxFor(x => x.FaturaSıraNo, new { @class = "form-control" })
+    <br />
+
+    <label><b>TARİH: </b></label>
+    @Html.TextBoxFor(x=>x.Tarih, new { @class = "form-control"})
+    <br />
+
+    <label><b>SAAT:</b></label>
+    @Html.TextBoxFor(x => x.Saat, new { @class = "form-control" })
+    <br />
+
+    <label><b>VERGİ DAİRESİ:</b></label>
+    @Html.TextBoxFor(x => x.VergiDairesi, new { @class = "form-control" })
+    <br />
+
+    <label><b>TESLİM EDEN:</b></label>
+    @Html.TextBoxFor(x => x.TeslimEden, new { @class = "form-control" })
+    <br />
+
+    <label><b>TESLİM ALAN:</b></label>
+    @Html.TextBoxFor(x => x.TeslimAlan, new { @class = "form-control" })
+    <br />
+
+    <button class="btn btn-warning" type="submit">Değişiklikleri Kaydet</button>
+}
+
+
